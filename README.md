@@ -1,1 +1,1 @@
-Webserver Raspberry Pi Pico w - wlan. Controle de LEDs da placa de desenvolvimento BitDogLab.
+Webserver Raspberry Pi Pico w - wlan. SmartHouse - Controle de Luzes de uma casa por meio da placa de desenvolvimento BitDogLab.
