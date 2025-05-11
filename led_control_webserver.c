@@ -98,9 +98,13 @@ int main()
 
     // Conectar à rede WiFI - fazer um loop até que esteja conectado
     printf("Conectando ao Wi-Fi...\n");
+    ssd1306_draw_string(&ssd, "Conectando...", 10, 29);
+    ssd1306_send_data(&ssd);
     while (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 20000))
     {
         printf("Falha ao conectar ao Wi-Fi\n");
+        ssd1306_draw_string(&ssd, "Falha ao conectar", 10, 29);
+        ssd1306_send_data(&ssd);
         sleep_ms(100);
         return -1;
     }
@@ -158,11 +162,11 @@ int main()
 
         if (gpio_get(LED_GREEN_PIN))
         {
-            ssd1306_draw_string(&ssd, "Quarto: On ", 10, 29);
+            ssd1306_draw_string(&ssd, "Quarto: On   ", 10, 29);
         }
         else
         {
-            ssd1306_draw_string(&ssd, "Quarto: Off", 10, 29);
+            ssd1306_draw_string(&ssd, "Quarto: Off  ", 10, 29);
         }
 
         if (gpio_get(LED_RED_PIN))
