@@ -1,9 +1,5 @@
 /**
- * AULA IoT - Embarcatech - Ricardo Prates - 004 - Webserver Raspberry Pi Pico w - wlan
- *
- * Material de suporte
- *
- * https://www.raspberrypi.com/documentation/pico-sdk/networking.html#group_pico_cyw43_arch_1ga33cca1c95fc0d7512e7fef4a59fd7475
+ * SmartHouse - Embarcatech - Leonardo Rodrigues Luz - Webserver Raspberry Pi Pico w - wlan
  */
 
 #include <stdio.h>  // Biblioteca padrão para entrada e saída
@@ -22,13 +18,13 @@
 #include "lib/ssd1306.h" // Biblioteca para controle do display OLED SSD1306
 #include "lib/font.h"
 
-#define I2C_PORT i2c1
-#define I2C_SDA 14
-#define I2C_SCL 15
-#define endereco 0x3C
-ssd1306_t ssd; // Inicializa a estrutura do display
+#define I2C_PORT i2c1 // Porta I2C utilizada
+#define I2C_SDA 14    // GPIO14 - SDA
+#define I2C_SCL 15    // GPIO15 - SCL
+#define endereco 0x3C // Endereço do display OLED SSD1306
+ssd1306_t ssd;        // Inicializa a estrutura do display
 
-// Credenciais WIFI - Tome cuidado se publicar no github!
+// Credenciais WIFI
 #define WIFI_SSID ""
 #define WIFI_PASSWORD ""
 
@@ -65,9 +61,8 @@ int main()
     // Inicializar os Pinos GPIO para acionamento dos LEDs da BitDogLab
     gpio_led_bitdog();
 
-    // I2C Initialisation. Using it at 400Khz.
-    i2c_init(I2C_PORT, 400 * 1000);
-    bool cor = true;
+    i2c_init(I2C_PORT, 400 * 1000);                               // Inicialização I2C em 400Khz
+    bool cor = true;                                              // Cor do display
     gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);                    // Set the GPIO pin function to I2C
     gpio_set_function(I2C_SCL, GPIO_FUNC_I2C);                    // Set the GPIO pin function to I2C
     gpio_pull_up(I2C_SDA);                                        // Pull up the data line
@@ -103,7 +98,8 @@ int main()
     while (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 20000))
     {
         printf("Falha ao conectar ao Wi-Fi\n");
-        ssd1306_draw_string(&ssd, "Falha ao conectar", 10, 29);
+        ssd1306_draw_string(&ssd, "Falha ao", 10, 29);
+        ssd1306_draw_string(&ssd, "conectar", 10, 39);
         ssd1306_send_data(&ssd);
         sleep_ms(100);
         return -1;
