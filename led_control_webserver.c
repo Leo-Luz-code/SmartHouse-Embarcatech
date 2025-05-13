@@ -215,8 +215,6 @@ void gpio_led_bitdog(void)
     npClear();              // Limpa o buffer do LED neopixel
 }
 
-// Inicializa o display OLED SSD1306
-
 // Função de callback ao aceitar conexões TCP
 static err_t tcp_server_accept(void *arg, struct tcp_pcb *newpcb, err_t err)
 {
@@ -243,7 +241,7 @@ void luzDaVaranda(void)
     }
 }
 
-// Tratamento do request do usuário - digite aqui
+// Tratamento do request do usuário
 void user_request(char **request)
 {
     if (strstr(*request, "GET /sala") != NULL)
@@ -299,16 +297,11 @@ static err_t tcp_server_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, er
 
     printf("Request: %s\n", request);
 
-    // Tratamento de request - Controle dos LEDs
+    // Tratamento de request - Controle dos LEDs / Luzes da casa
     user_request(&request);
 
     // Leitura da temperatura interna
     float temperature = temp_read();
-
-    // Variáveis de estado dos LEDs (0 = desligado, 1 = ligado)
-    int blue_status = 0;  // Estado inicial do LED Azul
-    int green_status = 0; // Estado inicial do LED Verde
-    int red_status = 0;   // Estado inicial do LED Vermelho
 
     // Cria a resposta HTML
     char html[1024];
