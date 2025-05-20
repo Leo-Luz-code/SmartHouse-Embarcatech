@@ -25,8 +25,8 @@
 ssd1306_t ssd;        // Inicializa a estrutura do display
 
 // Credenciais WIFI
-#define WIFI_SSID ""
-#define WIFI_PASSWORD ""
+#define WIFI_SSID "iPhone de Leo"
+#define WIFI_PASSWORD "abcdefgh"
 
 // Definição dos pinos dos LEDs
 #define LED_PIN CYW43_WL_GPIO_LED_PIN // GPIO do CI CYW43
@@ -95,10 +95,10 @@ int main()
     printf("Conectando ao Wi-Fi...\n");
     ssd1306_draw_string(&ssd, "Conectando...", 10, 29);
     ssd1306_send_data(&ssd);
-    while (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 20000))
+    while (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000))
     {
         printf("Falha ao conectar ao Wi-Fi\n");
-        ssd1306_draw_string(&ssd, "Falha ao", 10, 29);
+        ssd1306_draw_string(&ssd, "Falha tentando", 10, 29);
         ssd1306_draw_string(&ssd, "conectar", 10, 39);
         ssd1306_send_data(&ssd);
         sleep_ms(100);
@@ -110,6 +110,7 @@ int main()
     if (netif_default)
     {
         printf("IP do dispositivo: %s\n", ipaddr_ntoa(&netif_default->ip_addr));
+        ssd1306_draw_string(&ssd, ipaddr_ntoa(&netif_default->ip_addr), 20, 6); // Desenha uma string
     }
 
     // Configura o servidor TCP - cria novos PCBs TCP. É o primeiro passo para estabelecer uma conexão TCP.
