@@ -13,13 +13,15 @@ project(SmartHouse C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
-include_directories(${CMAKE_SOURCE_DIR}/lib)
+execute_process(COMMAND
+    py makefsdata.py
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+)
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(${PROJECT_NAME}
-    led_control_webserver.c
-    lib/np_led.c
-    lib/ssd1306.c
+    main.c
+
 )
 
 pico_set_program_name(${PROJECT_NAME} "${PROJECT_NAME}")
@@ -36,6 +38,7 @@ target_link_libraries(${PROJECT_NAME}
         hardware_adc
         hardware_i2c
         pico_cyw43_arch_lwip_threadsafe_background
+        pico_lwip_http
 )
 
 # Generate PIO header

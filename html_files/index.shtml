@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embarcatech - WebServer</title>
+  </head>
+  <body>
+    <h1>Embarcatech - WebServer</h1>
+    <br />
+    <h2>Este pedaço é SSI</h2>
+    <p>
+      Volt:
+      <!--#volt-->
+      V
+    </p>
+    <p>
+      Temp:
+      <!--#temp-->
+      C
+    </p>
+    <p>
+      LED:
+      <!--#led-->
+    </p>
+    <br />
+    <h2>Este pedaço é CGI</h2>
+    <a href="/led.cgi?led=1"><button>LED on</button></a>
+    <a href="/led.cgi?led=0"><button>LED off</button></a>
+    <br />
+    <a href="/index.shtml">Refresh</a>
+  </body>
+</html>
