@@ -17,8 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/lib)
 
 # Add executable. Default name is the project name, version 0.1
 add_executable(${PROJECT_NAME}
-    led_control_webserver.c
-    lib/np_led.c
+    SmartHouse.c
     lib/ssd1306.c
 )
 
@@ -37,9 +36,6 @@ target_link_libraries(${PROJECT_NAME}
         hardware_i2c
         pico_cyw43_arch_lwip_threadsafe_background
 )
-
-# Generate PIO header
-pico_generate_pio_header(${PROJECT_NAME} ${CMAKE_CURRENT_LIST_DIR}/ws2818b.pio)
 
 # Add the standard include files to the build
 target_include_directories(${PROJECT_NAME} PRIVATE
