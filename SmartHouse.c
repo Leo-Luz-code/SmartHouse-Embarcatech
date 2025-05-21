@@ -220,19 +220,19 @@ void user_request(char **request)
 {
     if (strstr(*request, "GET /sala") != NULL)
     {
-        gpio_put(LED_BLUE_PIN, gpio_get(LED_BLUE_PIN) == 0 ? 1 : 0);
+        gpio_put(LED_BLUE_PIN, !gpio_get(LED_BLUE_PIN));
     }
     else if (strstr(*request, "GET /quarto") != NULL)
     {
-        gpio_put(LED_GREEN_PIN, gpio_get(LED_GREEN_PIN) == 0 ? 1 : 0);
+        gpio_put(LED_GREEN_PIN, !gpio_get(LED_GREEN_PIN));
     }
     else if (strstr(*request, "GET /cozinha") != NULL)
     {
-        gpio_put(LED_RED_PIN, gpio_get(LED_RED_PIN) == 0 ? 1 : 0);
+        gpio_put(LED_RED_PIN, !gpio_get(LED_RED_PIN));
     }
     else if (strstr(*request, "GET /varanda") != NULL)
     {
-        cyw43_arch_gpio_put(LED_PIN, cyw43_arch_gpio_get(LED_PIN) == 0 ? 1 : 0);
+        cyw43_arch_gpio_put(LED_PIN, !cyw43_arch_gpio_get(LED_PIN));
     }
 };
 
